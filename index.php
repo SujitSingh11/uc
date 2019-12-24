@@ -41,13 +41,28 @@
             ?>
           </p>
           <p class="mt-4">
-            <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
+          <?php
+            $batch = $conn->query("SELECT * FROM uc_batch WHERE active=1");
+            if($batch->num_rows != 0)
+            {
+              ?>
+                <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
+              <?php
+            }
+            else
+            {
+              ?>
+                <button class="btn btn-primary px-4 disabled">Waiting</button>
+              <?php
+            }
+          ?>
+            
           </p>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="start_test" tabindex="-1" role="dialog" aria-labelledby="start_test" aria-hidden="true">
+<div class="modal fade" id="start_test" tabindex="-1" role="dialog" aria-labelledby="start_test" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -38,7 +38,7 @@
 						<li><a href="#section-5" ><span>Algorithm</span></a></li>
 					</ul>
 				</nav>
-				<form class="content" name="quiz"  id="quiz" action="quiz_attempt_script.php" method="POST">
+				<form class="content" name="quiz"  id="quiz" action="quiz_submit.php" method="POST">
 					<section id="section-1">
 						<div class="container my-3">
 								<div id="test"  class="card-body">
@@ -303,6 +303,8 @@
 								</div>
 							</div>
 					</section>
+					<input type="hidden" name="team_id" value="<?php echo $_SESSION['team_id']?>">
+					<input type="hidden" name="batch_id" value="<?php echo $_SESSION['batch_id']?>">
 				</form><!-- /content -->
 			</div><!-- /tabs -->
         </section>
