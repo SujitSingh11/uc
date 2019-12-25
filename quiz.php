@@ -322,7 +322,7 @@
         <script>
 			new CBPFWTabs( document.getElementById( 'tabs' ) );
 			window.onload=function(){ 
-			//	window.setTimeout(document.quiz.submit.bind(document.quiz), (60000*10));
+				window.setTimeout(document.quiz.submit.bind(document.quiz), (60000*10));
 			};
 		</script>
     </body>

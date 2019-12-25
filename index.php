@@ -45,6 +45,8 @@
             $batch = $conn->query("SELECT * FROM uc_batch WHERE active=1");
             if($batch->num_rows != 0)
             {
+              $row = $batch->fetch_assoc();
+              $_SESSION['batch_id'] = $row['batch_id'];
               ?>
                 <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
               <?php
