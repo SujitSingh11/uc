@@ -2,12 +2,12 @@
     session_start();
     include_once 'db/db.php';
     $team_name = mysqli_real_escape_string($conn,$_POST['team_name']);  
-    $techno_id_1 = mysqli_real_escape_string($conn,$_POST['techno_id_1']);
-    $techno_id_2 = mysqli_real_escape_string($conn,$_POST['techno_id_2']);
+    $techno_id_1 = $_POST['techno_id_1'];
+    $techno_id_2 = $_POST['techno_id_2'];
     $teammate_1_name = mysqli_real_escape_string($conn,$_POST['teammate_1_name']);
     $teammate_2_name = mysqli_real_escape_string($conn,$_POST['teammate_2_name']);
-    $teammate_1_no = mysqli_real_escape_string($conn,$_POST['teammate_1_no']);
-    $teammate_2_no = mysqli_real_escape_string($conn,$_POST['teammate_2_no']);
+    $teammate_1_no = $_POST['teammate_1_no'];
+    $teammate_2_no = $_POST['teammate_2_no'];
 
 
     if(empty($techno_id_1) OR empty($techno_id_2) OR empty($teammate_1_name) OR empty($teammate_2_name) OR empty($team_name) OR empty($teammate_2_no) OR empty($teammate_1_no))
@@ -30,10 +30,10 @@
         $result = $conn->query("SELECT * FROM uc_team WHERE team_name='$team_name'");
         if($result->num_rows == 0)
         {
-            $add_team = "INSERT INTO uc_team (team_name,techno_id_1,teammate_1_name,teammate_1_no,techno_id_2,teammate_2_name,teammate_2_no) VALUES ($team_name','$techno_id_1','$teammate_1_name','$teammate_1_no','$techno_id_2','$teammate_2_name','$teammate_2_no')";
+            $add_team = "INSERT INTO `uc_team`( `team_name`, `techno_id_1`, `teammate_1_name`, `teammate_1_no`, `techno_id_2`, `teammate_2_name`, `teammate_2_no`) VALUES ('$team_name',$techno_id_1,'$teammate_1_name',$teammate_1_no,$techno_id_2,'$teammate_2_name',$teammate_2_no)";
             $add_team_sql = mysqli_query($conn,$add_team);
             
-            $result = $conn->query("SELECT * FROM uc_team WHERE techno_id = '$techno_id' AND team_name='$team_name'");
+            $result = $conn->query("SELECT * FROM uc_team WHERE team_name='$team_name'");
 
             if($result->num_rows > 0)
             {
@@ -51,7 +51,7 @@
             }
             else
             {
-                $_SESSION['error'] = "Something went wrong contact event head.";
+                $_SESSION['error'] = "Something went wrong contact event manager.";
                 header('location: index.php');
             }
         }

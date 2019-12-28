@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2019 at 10:38 AM
+-- Generation Time: Dec 28, 2019 at 04:08 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -33,6 +33,13 @@ CREATE TABLE `uc_batch` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `uc_batch`
+--
+
+INSERT INTO `uc_batch` (`batch_id`, `user_id`, `active`, `time`) VALUES
+(1, 1, 1, '2019-12-28 14:00:24');
+
 -- --------------------------------------------------------
 
 --
@@ -45,13 +52,6 @@ CREATE TABLE `uc_batch_team` (
   `team_id` int(100) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `uc_batch_team`
---
-
-INSERT INTO `uc_batch_team` (`batch_team_id`, `batch_id`, `team_id`, `time`) VALUES
-(1, 1, 1, '2019-12-26 09:36:35');
 
 -- --------------------------------------------------------
 
@@ -201,22 +201,39 @@ CREATE TABLE `uc_quiz_result` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `uc_rounds`
+--
+
+CREATE TABLE `uc_rounds` (
+  `round_1` tinyint(1) NOT NULL DEFAULT '0',
+  `round_2` tinyint(1) NOT NULL DEFAULT '0',
+  `round_3` tinyint(1) NOT NULL DEFAULT '0',
+  `round_4` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `uc_rounds`
+--
+
+INSERT INTO `uc_rounds` (`round_1`, `round_2`, `round_3`, `round_4`) VALUES
+(1, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `uc_team`
 --
 
 CREATE TABLE `uc_team` (
   `team_id` int(100) NOT NULL,
   `team_name` varchar(100) NOT NULL,
-  `teammate_1` varchar(100) NOT NULL,
-  `teammate_2` varchar(100) NOT NULL
+  `techno_id_1` int(100) NOT NULL,
+  `teammate_1_name` varchar(100) NOT NULL,
+  `teammate_1_no` int(100) NOT NULL,
+  `techno_id_2` int(100) NOT NULL,
+  `teammate_2_name` varchar(100) NOT NULL,
+  `teammate_2_no` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `uc_team`
---
-
-INSERT INTO `uc_team` (`team_id`, `team_name`, `teammate_1`, `teammate_2`) VALUES
-(1, 'Ultimate Coder', 'Aaron', 'Sujit');
 
 -- --------------------------------------------------------
 
@@ -294,12 +311,12 @@ ALTER TABLE `uc_user`
 -- AUTO_INCREMENT for table `uc_batch`
 --
 ALTER TABLE `uc_batch`
-  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `uc_batch_team`
 --
 ALTER TABLE `uc_batch_team`
-  MODIFY `batch_team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `batch_team_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uc_question`
 --
@@ -319,7 +336,7 @@ ALTER TABLE `uc_quiz_result`
 -- AUTO_INCREMENT for table `uc_team`
 --
 ALTER TABLE `uc_team`
-  MODIFY `team_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `team_id` int(100) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uc_user`
 --

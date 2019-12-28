@@ -30,7 +30,7 @@
     <div class="row justify-content-center py-5">
       <div class="col-12 col-md-10 col-lg-8 text-center">
         <div class="fdb-box">
-          <h1>Ultimate Coder</h1>
+          <h1>Ultimate Coder <?php  if($row['round_1']==1) { echo 'Round 1'; } elseif($row['round_2']==1) { echo 'Round 2'; } elseif($row['round_3']==1) { echo 'Round 3'; } elseif($row['round_4']==1) { echo 'Round 4'; } ?> </h1>
           <p class="lead">
           <?php
             if($row['round_1']==1)
@@ -65,8 +65,8 @@
             $batch = $conn->query("SELECT * FROM uc_batch WHERE active=1");
             if($batch->num_rows != 0)
             {
-              $row = $batch->fetch_assoc();
-              $_SESSION['batch_id'] = $row['batch_id'];
+              $row_batch = $batch->fetch_assoc();
+              $_SESSION['batch_id'] = $row_batch['batch_id'];
               ?>
                 <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
               <?php
@@ -78,12 +78,12 @@
               <?php
             }
           ?>
-            
           </p>
         </div>
       </div>
     </div>
   </div>
+<?php if($row['round_1']==1){ ?>
 <div class="modal fade" id="start_test" tabindex="-1" role="dialog" aria-labelledby="start_test" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -96,12 +96,13 @@
       <div class="modal-body">
         <form method="POST" action="quiz_start_script.php">
           <div class="px-3">
-            <input type="number" class="form-control my-2" placeholder="Techno ID" name="tech_id"/>
             <input type="text" class="form-control my-2" placeholder="Team Name" name="team_name"/>
+            <input type="number" class="form-control my-2" placeholder="First Teammate Techno ID" name="techno_id_1"/>
             <input type="text" class="form-control my-2" placeholder="First Teammate Name" name="teammate_1_name">
             <input type="number" class="form-control my-2" placeholder="First Teammate Number" name="teammate_1_no"/>
+            <input type="number" class="form-control my-2" placeholder="Second Teammate Techno ID" name="techno_id_2"/>
             <input type="text" class="form-control my-2" placeholder="Second Teammate Name" name="teammate_2_name">
-            <input type="number" class="form-control my-2" placeholder="Second Teammate Number" name="teammate_1_no"/>
+            <input type="number" class="form-control my-2" placeholder="Second Teammate Number" name="teammate_2_no"/>
             <input type="hidden" value="1" name="test_status">
           </div>
       </div>
@@ -113,6 +114,7 @@
     </div>
   </div>
 </div>
+<?php } ?>
 </section>
 <footer class="fdb-block footer-small bg-dark" data-block-type="footers" data-id="5">
   <div class="container">

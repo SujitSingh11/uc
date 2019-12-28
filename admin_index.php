@@ -31,7 +31,7 @@
           $batch_id = mysqli_real_escape_string($conn,$_POST['batch_id']);
           $update_status = "UPDATE `uc_batch` SET `active`= 1 WHERE batch_id = $batch_id";
           $active_batch = mysqli_query($conn,$update_status);
-          $_SESSION['error'] = "Batch ".$batch_id." Test Activated";
+          $_SESSION['error'] = "Batch ".$batch_id." Quiz Activated";
         }
         else
         {
@@ -45,6 +45,34 @@
         $deactive_batch = mysqli_query($conn,$update_status);
         $_SESSION['error'] = "Batch ".$batch_id." Test Deactivated";
       }
+      
+      if(isset($_POST['round_activate']))
+      {
+        $round_id = $_POST['round_id'];
+        if($round_id == 1)
+        {
+            $update_round = "UPDATE `uc_rounds` SET `round_1`=1,`round_2`=0,`round_3`=0,`round_4`=0";
+            $round_activate = mysqli_query($conn,$update_round);
+        }
+        elseif($round_id == 2)
+        {
+            $update_round = "UPDATE `uc_rounds` SET `round_1`=0,`round_2`=1,`round_3`=0,`round_4`=0";
+            $round_activate = mysqli_query($conn,$update_round);
+        }
+        elseif($round_id == 3)
+        {
+            $update_round = "UPDATE `uc_rounds` SET `round_1`=0,`round_2`=0,`round_3`=1,`round_4`=0";
+            $round_activate = mysqli_query($conn,$update_round);
+        }
+        elseif($round_id == 4)
+        {
+            $update_round = "UPDATE `uc_rounds` SET `round_1`=0,`round_2`=0,`round_3`=0,`round_4`=1";
+            $round_activate = mysqli_query($conn,$update_round);
+        }
+        
+        $_SESSION['error'] = "Round ".$round_id." activated";
+      }
+
     }
 ?>
 <!DOCTYPE html>
@@ -83,7 +111,7 @@
   </div>
 </section>
 <section class="fdb-block p-5">
-  <div class="container">
+  <div class="">
     <?php
         if( isset($_SESSION['error']) AND !empty($_SESSION['error']) ){
             ?>
@@ -162,67 +190,131 @@
                         </tbody>
                     </table>
             </div>
-            <button class="btn btn-success px-5" data-toggle="modal" data-target="#selected_team">Selected Teams</button>
         </div>
       </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="selected_team" tabindex="-1" role="dialog" aria-labelledby="selected_team" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="start_test">Selected Team</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class="row mt-4 align-items-center justify-content-center">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"></div>
+          <h2>Round List</h2>
         </div>
-        <div class="modal-body">
-          <div class="col-auto mt-4 mt-sm-0">
-            <div class="table-responsive">
-                <table id="add-row" class="display table table-striped table-hover" >
-                    <thead>
-                        <tr>
-                            <th>Team No.</th>
-                            <th>Batch No.</th>
-                            <th>Team Name</th>
-                            <th>Partcipant 1</th>
-                            <th>Partcipant 2</th>
-                            <th>Marks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        $no = 1;
-                        $sql_selected = $conn->query("SELECT * FROM uc_quiz_result ORDER BY marks_obtained DESC LIMIT 24");
-                        while ($row = mysqli_fetch_assoc($sql_selected)) {
-                          $team_id = $row['team_id'];
-                          $batch_id = $row['batch_id'];
-                          $sql_team = $conn->query("SELECT * FROM uc_team WHERE team_id = $team_id");
-                          $row_team = mysqli_fetch_assoc($sql_team);
-                    ?>
-                        <tr>
-                          <td><?= $no ?></td>
-                          <td><?= $row['batch_id']?></td>
-                          <td><?= $row_team['team_name']?></td>
-                          <td><?= $row_team['teammate_1']?></td>
-                          <td><?= $row_team['teammate_2']?></td>
-                          <td><?= $row['marks_obtained']?></td>
-                        </tr>
-                    <?php
-                        }
-                    ?>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-auto mt-4 mt-sm-0">
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table id="add-row" style="width:800px;" class="display table table-striped table-hover" >
+                        <thead>
+                            <tr>
+                                <th>Round No.</th>
+                                <th>Status</th>
+                                <th style="width: 15%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $no = 1;
+                                $sql_round = $conn->query("SELECT * FROM uc_rounds");
+                                $row_round = mysqli_fetch_assoc($sql_round);
+                                while ($no<5) {
+                            ?>
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?php 
+                                        if($row_round['round_'.$no.'']==1){
+                                            echo "Active";
+                                        }else {
+                                            echo "Not Active";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <form class="form-button-action" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
+                                            <input type="hidden" name="round_id" value="<?=$no?>">
+                                            <?php
+                                            if ($row['active'] == 0) {
+                                            ?>
+                                            <button type="submit" data-toggle="tooltip" data-placement="right" title="Activate" name="round_activate" class="btn btn-primary">
+                                                <i class="fa fa-check-circle"></i>
+                                            </button>
+                                            <?php
+                                            }
+                                            else
+                                            { ?>
+                                                <button type="submit" data-toggle="tooltip" data-placement="right" title="Deactivate" name="round_deactivate" class="btn btn-warning">
+                                                    <i class="fa fa-times-circle"></i>
+                                                </button> <?php
+                                            }
+                                            ?>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php
+                                $no++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+    <div class="mt-5 align-items-center justify-content-center">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"></div>
+          <h2>Selected Teams</h2>
+        </div>
+            <div class="col-auto mt-3 mt-sm-0">
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="display table table-striped table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Team No.</th>
+                                  <th>Batch No.</th>
+                                  <th>Team Name</th>
+                                  <th>Member 1</th>
+                                  <th>Mobile No.</th>
+                                  <th>Member 1</th>
+                                  <th>Mobile No.</th>
+                                  <th>Marks</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                              $no = 1;
+                              $sql_selected = $conn->query("SELECT * FROM uc_quiz_result ORDER BY marks_obtained DESC LIMIT 24");
+                              while ($row = mysqli_fetch_assoc($sql_selected)) {
+                                $team_id = $row['team_id'];
+                                $batch_id = $row['batch_id'];
+                                $sql_team = $conn->query("SELECT * FROM uc_team WHERE team_id = $team_id");
+                                $row_team = mysqli_fetch_assoc($sql_team);
+                          ?>
+                              <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $row['batch_id']?></td>
+                                <td><?= $row_team['team_name']?></td>
+                                <td><?= $row_team['teammate_1_name']?></td>
+                                <td><?= $row_team['teammate_1_no']?></td>
+                                <td><?= $row_team['teammate_2_name']?></td>
+                                <td><?= $row_team['teammate_2_no']?></td>
+                                <td><?= $row['marks_obtained']?></td>
+                              </tr>
+                          <?php
+                              }
+                          ?>
+                          </tbody>
+                      </table>
+                    </div>
+                </div>
               </div>
-            </div>    
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-  </div>
-</div>
 </section>
 <footer class="fdb-block footer-small bg-dark" data-block-type="footers" data-id="5">
   <div class="container">
