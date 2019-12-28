@@ -38,6 +38,9 @@
 						<li class="nav-item">
 							<button class="btn btn-light" id="submitTest" type="submit" form="quiz">Submit</button>
 						</li>
+						<li class="nav-item">
+							<div class="clockdiv"></div>
+						</li>
                     </div>
                 </nav>
             </div>
@@ -356,7 +359,7 @@
 						return false;
 					});
 			});
-
+			
 		</script>
     </body>
 </html>

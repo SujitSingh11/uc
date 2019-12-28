@@ -24,7 +24,7 @@
   </div>
 </header>
 <section class="fdb-block py-0 fp-active" data-block-type="forms" data-id="6" draggable="true">
-  <div class="container py-5 my-5" style="background-image: url(https://cdn.jsdelivr.net/gh/froala/design-blocks@2.0.1/dist/imgs//shapes/4.svg);">
+  <div class="container py-5 my-5" style="background-image: url(imgs/shapes/4.svg);">
     <div class=" row justify-content-end">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5 text-left">
         <form class="fdb-box" action="script_login.php" method="POST">
@@ -66,10 +66,9 @@
       <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right" style="z-index: 10000;"><p>© 2019 Ultimate-Coder Technovanza</p></div>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+  <script src="js/jq.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/all.min.js"></script>
 </body>
 </html>

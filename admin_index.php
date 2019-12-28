@@ -275,7 +275,7 @@
                       <table class="display table table-striped table-hover">
                           <thead>
                               <tr>
-                                  <th>Team No.</th>
+                                  <th>No.</th>
                                   <th>Batch No.</th>
                                   <th>Team Name</th>
                                   <th>Member 1</th>
@@ -306,6 +306,7 @@
                                 <td><?= $row['marks_obtained']?></td>
                               </tr>
                           <?php
+                              $no++;
                               }
                           ?>
                           </tbody>

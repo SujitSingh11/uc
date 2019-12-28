@@ -19,14 +19,14 @@
         <a class="navbar-brand" href=""><img src="imgs/techno_logo.png" width="300" height="70" alt=""></a>
         <div class="navbar-nav">
             <li class="nav-item active">
-              <h3>Ultimate Coder Round 1</h3>
+              <h3>Ultimate Coder</h3>
             </li>
         </div>
     </nav>
   </div>
 </header>
 <section class="fdb-block py-0">
-  <div class="container py-5 my-5" style="background-image: url(imgs/shapes/2.svg);">
+  <div class="container py-5 my-5" style="background-image: url(imgs/shapes/<?php  if($row['round_1']==1) { echo '1'; } elseif($row['round_2']==1) { echo '2'; } elseif($row['round_3']==1) { echo '7'; } elseif($row['round_4']==1) { echo '5'; } ?>.svg);">
     <div class="row justify-content-center py-5">
       <div class="col-12 col-md-10 col-lg-8 text-center">
         <div class="fdb-box">
@@ -62,20 +62,37 @@
           </p>
           <p class="mt-4">
           <?php
-            $batch = $conn->query("SELECT * FROM uc_batch WHERE active=1");
-            if($batch->num_rows != 0)
-            {
-              $row_batch = $batch->fetch_assoc();
-              $_SESSION['batch_id'] = $row_batch['batch_id'];
-              ?>
-                <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
-              <?php
+            if($row['round_1']==1){
+              $batch = $conn->query("SELECT * FROM uc_batch WHERE active=1");
+              if($batch->num_rows != 0)
+              {
+                $row_batch = $batch->fetch_assoc();
+                $_SESSION['batch_id'] = $row_batch['batch_id'];
+                ?>
+                  <button class="btn btn-primary px-4" data-toggle="modal" data-target="#start_test">Start</button>
+                <?php
+              }
+              else
+              {
+                ?>
+                  <button class="btn btn-primary px-4 disabled">Waiting</button>
+                <?php
+              }
             }
-            else
-            {
-              ?>
-                <button class="btn btn-primary px-4 disabled">Waiting</button>
-              <?php
+            elseif($row['round_2']==1)
+            { ?>
+              <a class="btn btn-primary px-4 disabled" href="ftp/Round_2.pdf">Start</a>
+             <?php
+            }
+            elseif($row['round_3']==1)
+            { ?>
+              <a class="btn btn-primary px-4 disabled" href="ftp/Round_3.pdf">Start</a>
+             <?php
+            }
+            elseif($row['round_4']==1)
+            { ?>
+              <a class="btn btn-primary px-4 disabled" href="ftp/Round_4.pdf">Start</a>
+             <?php
             }
           ?>
           </p>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2019 at 04:08 PM
+-- Generation Time: Dec 28, 2019 at 08:40 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -32,13 +32,6 @@ CREATE TABLE `uc_batch` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `uc_batch`
---
-
-INSERT INTO `uc_batch` (`batch_id`, `user_id`, `active`, `time`) VALUES
-(1, 1, 1, '2019-12-28 14:00:24');
 
 -- --------------------------------------------------------
 
@@ -85,7 +78,7 @@ INSERT INTO `uc_question` (`question_id`, `question_type`, `question_mark`, `que
 (13, 1, 1, '<pre style=''display:inline;''>Which of the following is not a \r\nway to sort an array</pre>', 'Merge sort', 'Deletion sort', 'Insertion sort', 'Quick sort', 2),
 (14, 1, 1, '<pre style=''display:inline;''>Which of the following inheritance \r\ntype is not available in Java using just classes?\r\n</pre>', 'Multilevel inheritance', 'Simple inheritance', 'Multiple inheritance', 'Hierarchical inheritance', 3),
 (15, 1, 1, '<pre style=''display:inline;''>Which of the following is an application of Stacks?</pre>', 'Expression evaluation', 'Parenthesis checking', 'Function call', 'All of the above', 4),
-(16, 2, 1, '<pre style=''display:inline;''>What is the output of the following C snippet?<code>int main()\r\n{\r\n    int i;\r\n    for (i = 0; i<5; i++)\r\n    {\r\n        int i;\r\n        i = 10;\r\n        printf("%d ", i) ;\r\n    }\r\n    return 0;\r\n}\r\n</code></pre>', 'Compile time error', '10', '10 10 10 10', '0 1 2 3 4', 3),
+(16, 2, 1, '<pre style=''display:inline;''>What is the output of the following C snippet?\r\n<code>int main()\r\n{\r\n    int i;\r\n    for (i = 0; i<5; i++)\r\n    {\r\n        int i;\r\n        i = 10;\r\n        printf("%d ", i) ;\r\n    }\r\n    return 0;\r\n}\r\n</code></pre>', 'Compile time error', '10', '10 10 10 10', '0 1 2 3 4', 3),
 (26, 2, 1, '<pre style=''display:inline;''>Which of the following programming languages is the oldest?\r\n</pre>', 'C++', 'JAVA', 'Python', 'C', 4),
 (27, 2, 1, '<pre style=''display:inline;''>Which of the following is not a compound assignment operator?</pre>', '%=', '+=', '==', '>>=', 3),
 (28, 2, 1, '<pre style=''display:inline;''>Which of the following is not a unary operator?</pre>', '++', '-', '&&', 'sizeof()', 3),
@@ -128,7 +121,7 @@ INSERT INTO `uc_question` (`question_id`, `question_type`, `question_mark`, `que
 (65, 2, 2, '<pre style=''display:inline;''>Pick the best statement for the following program snippet?\r\nint main()\r\n{\r\n int var;  /*Suppose address of var is 2000 */\r\n \r\n void *ptr = &var;\r\n *ptr = 5;\r\n printf("var=%d and *ptr=%d",var,*ptr);\r\n              \r\n return 0;\r\n}\r\n</pre>', 'It will print â€œvar=5 and *ptr=2000â€', 'It will print â€œvar=5 and *ptr=5â€', 'It will print â€œvar=5 and *ptr=XYZâ€, where XYZ is some random address', 'Compile error', 4),
 (66, 2, 1, '<pre style=''display:inline;''>In the context of C data types, which of the following are valid datatypes?</pre>', 'unsigned long long int', 'long long double', 'unsigned long double', 'All of the above', 1),
 (67, 2, 2, '<pre style=''display:inline;''>Assuming that the size of an integer is 4 bytes and size of a pointer is 8 bytes.\r\nWhat is the output of the following?\r\nint main()\r\n{\r\n    printf("%lu ", sizeof(int ));\r\n    printf("%lu ", sizeof(int *));\r\n    printf("%lu ", sizeof(int **));\r\n}\r\n</pre>', '4 4 4', '8 8 8', '4 4 8', '4 8 8', 4),
-(68, 1, 1, '<pre style=''display:inline;''>Which of the following is true about linked list representation of stacks?</pre>', 'In push operation, if new nodes are inserted at the beginning of the linked list. Then in pop, nodes', 'In push operation, if new nodes are inserted at the end of the linked list. Then in pop, nodes must ', 'Both of the above', 'None of the above', 4),
+(68, 1, 1, '<pre style=''display:inline;''>Which of the following is true about linked list representation of stacks?</pre>', 'In push operation, if new nodes are inserted at the beginning of the linked list. Then in pop, nodesIn push operation, if new nodes are inserted at the beginning of the linked list. Then in pop, nodes must be removed from the end.', 'In push operation, if new nodes are inserted at the end of the linked list. Then in pop, nodes must be removed from the beginning.\n', 'Both of the above', 'None of the above', 4),
 (69, 5, 1, '<pre style=''display:inline;''>Consider the pseudocode that uses a stack. What is the input for \r\nthe string â€œHelloâ€?\r\ndeclare a stack of characters\r\nwhile ( there are more characters in the word to read )\r\n{\r\n   read a character\r\n   push the character on the stack\r\n}\r\nwhile ( the stack is not empty )\r\n{\r\n   pop a character off the stack\r\n   write the character to the screen\r\n}\r\n</pre>', 'Hello', 'olleH', 'dlroWolleH', 'HelloWorld', 2),
 (70, 1, 1, '<pre style=''display:inline;''>How many stacks are needed to implement a queue?\r\n</pre>', '1', '2', '3', '4', 2),
 (71, 5, 2, '<pre style=''display:inline;''>Which of the following sorting algorithms can be used to sort a random linked list\r\nin minimum time?\r\n</pre>', 'Selection sort', 'Quick sort', 'Merge sort', 'Heap sort', 3),
@@ -216,7 +209,7 @@ CREATE TABLE `uc_rounds` (
 --
 
 INSERT INTO `uc_rounds` (`round_1`, `round_2`, `round_3`, `round_4`) VALUES
-(1, 0, 0, 0);
+(0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -311,7 +304,7 @@ ALTER TABLE `uc_user`
 -- AUTO_INCREMENT for table `uc_batch`
 --
 ALTER TABLE `uc_batch`
-  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uc_batch_team`
 --

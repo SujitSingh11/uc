@@ -42,7 +42,6 @@
                 $batch_id = $_SESSION['batch_id'];
                 $add_team = "INSERT INTO uc_batch_team (batch_id,team_id) VALUES ('$batch_id','$team_id')";
                 $add_team_sql = mysqli_query($conn,$add_team);
-
                 $_SESSION['team_id'] = $team['team_id'];
                 $_SESSION['techno_id'] = $team['techno_id'];
                 $_SESSION['team_name'] = $team['team_name'];
