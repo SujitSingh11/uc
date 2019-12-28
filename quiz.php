@@ -1,6 +1,12 @@
 <?php
     include 'db/db.php';
 	session_start();
+	
+	if($_SESSION['test_status'] != 1)
+    {
+        $_SESSION['error'] = "Start a new test or contact the Event Head";
+        header('location: index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +18,15 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<style>
+		.back-to-top {
+			position: fixed;
+			bottom: 25px;
+			right: 25px;
+			display: none;
+		}
+		
+	</style>
     <title>Ultimate Coder</title>
 </head>
     <body>
@@ -305,25 +320,43 @@
 					</section>
 					<input type="hidden" name="team_id" value="<?php echo $_SESSION['team_id']?>">
 					<input type="hidden" name="batch_id" value="<?php echo $_SESSION['batch_id']?>">
+					<a id="back-to-top" href="#" class="btn btn-dark btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
 				</form><!-- /content -->
 			</div><!-- /tabs -->
         </section>
+		
         <footer class="fdb-block footer-small bg-dark" data-block-type="footers" data-id="5">
             <div class="container">
                 <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right" style="z-index: 10000;"><p>© 2019 Ultimate-Coder Technovanza</p></div>
             </div>
         </footer>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+        <script src="js/jq.min.js"></script>
+		<script src="js/popper.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/all.min.js"></script>
         <script src="js/cbp.js"></script>
         <script>
 			new CBPFWTabs( document.getElementById( 'tabs' ) );
 			window.onload=function(){ 
 				window.setTimeout(document.quiz.submit.bind(document.quiz), (60000*10));
 			};
+			$(document).ready(function(){
+				$(window).scroll(function () {
+						if ($(this).scrollTop() > 50) {
+							$('#back-to-top').fadeIn();
+						} else {
+							$('#back-to-top').fadeOut();
+						}
+					});
+					// scroll body to 0px on click
+					$('#back-to-top').click(function () {
+						$('body,html').animate({
+							scrollTop: 0
+						}, 400);
+						return false;
+					});
+			});
+
 		</script>
     </body>
 </html>

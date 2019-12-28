@@ -2,7 +2,7 @@
 include_once 'db/db.php';
 session_start();
     if (isset($_POST['submit'])) {
-        for($i = 0; $i < 4; $i++)
+        for($i = 0; $i < 1; $i++)
         {
             $question = mysqli_real_escape_string($conn,$_POST['question'][$i]);
             $option_1 = mysqli_real_escape_string($conn,$_POST['option_1'][$i]);
@@ -42,7 +42,7 @@ session_start();
 <body>
     <form method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
         <?php
-        for($i=0;$i<4;$i++)
+        for($i=0;$i<1;$i++)
         {
         ?>
             Question <?php echo ($i+1)?>:<br> <textarea type="text" rows="10" columns="40" name="question[]"><pre style='display:inline;'></pre></textarea><br>

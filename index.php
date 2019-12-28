@@ -1,6 +1,8 @@
 <?php
     include 'db/db.php';
     session_start();
+    $round = $conn->query("SELECT * FROM uc_rounds");
+    $row = $round->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,7 @@
         <a class="navbar-brand" href=""><img src="imgs/techno_logo.png" width="300" height="70" alt=""></a>
         <div class="navbar-nav">
             <li class="nav-item active">
-              <h3>Ultimate Coder</h3>
+              <h3>Ultimate Coder Round 1</h3>
             </li>
         </div>
     </nav>
@@ -30,7 +32,25 @@
         <div class="fdb-box">
           <h1>Ultimate Coder</h1>
           <p class="lead">
-            Welcome to you first round of I-Code biggest event, here we will test your knowledge to see if you have what it takes to be the Ultimate Coder
+          <?php
+            if($row['round_1']==1)
+            {
+                echo "Welcome to the first round of I-Code's biggest event, here we will test your knowledge to see if you have what it takes to be the Ultimate Code This round is going to be an MCQ based one where you need to solve 90 questions in 10 minutes. Since we want suitable candidates, we have incorporated negative marking for the wrong answers.";
+
+            }
+            elseif($row['round_2']==1)
+            {
+                echo "Now that we decided that you’re a suitable candidate, we need to begin testing your worth. This round is going to be based on the Soul and Power stones. If you know what those Infinity stones are capable of, you should get a clue about what kind of testing would happen. You will be given questions that you need to solve with us snapping away at your complete potential.";
+            }
+            elseif($row['round_3']==1)
+            {
+               echo "By now you’ve probably gotten a taste of what we expect from our candidates. But wait, it gets even tougher. This round is going to be based on the Mind stone. Altering the human memory and bending it to your will has been a secret desire that we’ve all had. We are going to give you some problems to solve, however, you won’t have a few of your memories in the round.";
+            }
+            elseif($row['round_4']==1)
+            {
+                echo "This is the final round, we want to remain true to our task of finding a suitable wielder. We are going to have a list of tough questions for you to solve. However, someone snapped away the explanations of the questions. All you get is the Input and the Output fields to work with. Do you have it in you to find out the solution? Are you worthy of wielding the power of the Infinity stones?";
+            }
+          ?>
           </p>
           <p>
             <?php
@@ -76,9 +96,13 @@
       <div class="modal-body">
         <form method="POST" action="quiz_start_script.php">
           <div class="px-3">
+            <input type="number" class="form-control my-2" placeholder="Techno ID" name="tech_id"/>
             <input type="text" class="form-control my-2" placeholder="Team Name" name="team_name"/>
-            <input type="text" class="form-control my-2" placeholder="First Teammate Name" name="teammate_1">
-            <input type="text" class="form-control my-2" placeholder="Second Teammate Name" name="teammate_2">
+            <input type="text" class="form-control my-2" placeholder="First Teammate Name" name="teammate_1_name">
+            <input type="number" class="form-control my-2" placeholder="First Teammate Number" name="teammate_1_no"/>
+            <input type="text" class="form-control my-2" placeholder="Second Teammate Name" name="teammate_2_name">
+            <input type="number" class="form-control my-2" placeholder="Second Teammate Number" name="teammate_1_no"/>
+            <input type="hidden" value="1" name="test_status">
           </div>
       </div>
       <div class="modal-footer">
@@ -95,10 +119,9 @@
       <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right" style="z-index: 10000;"><p>© 2019 Ultimate-Coder Technovanza</p></div>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+<script src="js/jq.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/all.min.js"></script>
 </body>
 </html>

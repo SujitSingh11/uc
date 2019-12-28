@@ -98,10 +98,14 @@
         }
       ?>
     <div class="row align-items-center justify-content-center">
-      <div class="col-auto">
-        <h2>Quizs List</h2>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"></div>
+          <h2>Quizs List</h2>
+        </div>
         <div class="row">
             <div class="col-auto mt-4 mt-sm-0">
+              <div class="card-body">
                 <div class="table-responsive">
                     <table id="add-row" style="width:800px;" class="display table table-striped table-hover" >
                         <thead>
@@ -161,13 +165,14 @@
             <button class="btn btn-success px-5" data-toggle="modal" data-target="#selected_team">Selected Teams</button>
         </div>
       </div>
+      </div>
     </div>
   </div>
   <div class="modal fade" id="selected_team" tabindex="-1" role="dialog" aria-labelledby="selected_team" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="start_test">Confirm to add a New batch</h5>
+          <h5 class="modal-title" id="start_test">Selected Team</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -179,22 +184,29 @@
                     <thead>
                         <tr>
                             <th>Team No.</th>
+                            <th>Batch No.</th>
                             <th>Team Name</th>
+                            <th>Partcipant 1</th>
+                            <th>Partcipant 2</th>
                             <th>Marks</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                         $no = 1;
-                        $sql_selected = $conn->query("SELECT * FROM uc_quiz_result ORDER BY marks_obtained LIMIT 24");
+                        $sql_selected = $conn->query("SELECT * FROM uc_quiz_result ORDER BY marks_obtained DESC LIMIT 24");
                         while ($row = mysqli_fetch_assoc($sql_selected)) {
                           $team_id = $row['team_id'];
+                          $batch_id = $row['batch_id'];
                           $sql_team = $conn->query("SELECT * FROM uc_team WHERE team_id = $team_id");
                           $row_team = mysqli_fetch_assoc($sql_team);
                     ?>
                         <tr>
                           <td><?= $no ?></td>
+                          <td><?= $row['batch_id']?></td>
                           <td><?= $row_team['team_name']?></td>
+                          <td><?= $row_team['teammate_1']?></td>
+                          <td><?= $row_team['teammate_2']?></td>
                           <td><?= $row['marks_obtained']?></td>
                         </tr>
                     <?php
@@ -217,10 +229,9 @@
       <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right" style="z-index: 10000;"><p>© 2019 Ultimate-Coder Technovanza</p></div>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
+<script src="js/jq.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/all.min.js"></script>
 </body>
 </html>
